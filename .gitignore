@@ -1,0 +1,26 @@
+# Virtual environment
+.Ecom_venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Data — never commit raw or processed data
+data/raw/
+data/processed/
+
+# Logs — runtime output, not source code
+logs/
+
+# Kaggle credentials — CRITICAL, never commit
+.kaggle/
+kaggle.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Ruff cache
+.ruff_cache/
+
+# VS Code
+.vscode/
