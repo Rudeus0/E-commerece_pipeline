@@ -47,3 +47,28 @@ def merge_datasets(ecom: dict) -> pd.DataFrame:
     
     logger.info(f"Final shape:{ecom_merge.shape}")
     return ecom_merge
+
+
+def clean_data(ecom: pd.DataFrame) -> pd.DataFrame:
+    
+    logger.info(f"Shape before cleaning: {ecom.shape}")
+    
+    ecom = ecom.copy()
+    
+    ecom = ecom.drop_duplicates() # drop duplicates
+    
+    ecom = ecom.dropna(subset=["order_id"]) # drop rows where order_id is null
+    
+    date_cols = [
+        "order_purchase_timestamp",
+        "order_delivered_customer_date",
+        "order_estimated_delivery_date"
+    ]
+    
+    for col in date_cols:
+        ecom[col] = pd.to_datetime(ecom[col])
+        
+    
+    logger.info(f"Shape after cleaning: {ecom.shape}")
+    
+    return ecom
