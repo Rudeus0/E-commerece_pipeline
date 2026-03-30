@@ -1,5 +1,5 @@
 import pandas as pd
-from src.config import RAW_DATA
+from src.config import RAW_DATA,PROCESSED_DATA
 from src.utils import get_logger
 
 logger = get_logger("cleaning")
@@ -70,5 +70,18 @@ def clean_data(ecom: pd.DataFrame) -> pd.DataFrame:
         
     
     logger.info(f"Shape after cleaning: {ecom.shape}")
+    
+    return ecom
+
+def run_pipeline() -> pd.DataFrame:
+    ecom = load_datasets()
+    ecom_merge = merge_datasets(ecom)
+    ecom = clean_data(ecom_merge)
+    
+        # export to processed folder
+    out_path = PROCESSED_DATA /"olist_master.csv"
+    ecom.to_csv(out_path, index=False)
+    
+    logger.info(f"Pipeline complete. saved to {out_path}")
     
     return ecom
