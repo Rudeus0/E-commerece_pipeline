@@ -14,7 +14,6 @@ EXPECTED_SCHEMA = {
 
 def scan_raw_data():
 
-
     if not RAW_DATA.exists():
         logger.error(f"Path not found {RAW_DATA}")
         return
